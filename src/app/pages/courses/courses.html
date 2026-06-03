@@ -71,9 +71,10 @@
               <a [href]="course.syllabus" target="_blank" rel="noopener noreferrer">
                 Visa kursplan
               </a>
-            </td>
             <td>
-              <button type="button">Lägg till</button>
+              <button type="button" (click)="addToSchedule(course)">
+                Lägg till
+              </button>
             </td>
           </tr>
         }

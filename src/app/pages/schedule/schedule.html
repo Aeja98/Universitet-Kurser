@@ -1,4 +1,46 @@
-<section>
+<section class="schedule-page">
   <h1>Ramschema</h1>
-  <p>Här ska valda kurser visas.</p>
+
+  @if (selectedCourses.length === 0) {
+    <p>Du har inte lagt till några kurser i ditt ramschema än.</p>
+  } @else {
+    <p>Antal valda kurser: {{ selectedCourses.length }}</p>
+    <p>Totalt antal högskolepoäng: {{ getTotalPoints() }} hp</p>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Kurskod</th>
+            <th>Kursnamn</th>
+            <th>Poäng</th>
+            <th>Ämne</th>
+            <th>Kursplan</th>
+            <th>Ta bort</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (course of selectedCourses; track course.courseCode) {
+            <tr>
+              <td>{{ course.courseCode }}</td>
+              <td>{{ course.courseName }}</td>
+              <td>{{ course.points }}</td>
+              <td>{{ course.subject }}</td>
+              <td>
+                <a [href]="course.syllabus" target="_blank" rel="noopener noreferrer">
+                  Visa kursplan
+                </a>
+              </td>
+              <td>
+                <button type="button" (click)="removeFromSchedule(course.courseCode)">
+                  Ta bort
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
 </section>

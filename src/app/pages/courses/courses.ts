@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../../models/course';
 import { CourseService } from '../../services/course';
+import { ScheduleService } from '../../services/schedule';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -18,7 +19,10 @@ export class Courses implements OnInit {
   sortColumn: keyof Course | '' = '';
   sortDirection: 'asc' | 'desc' = 'asc';
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private courseService: CourseService,
+    private scheduleService: ScheduleService
+  ) {}
 
   ngOnInit(): void {
     this.courseService.getCourses().subscribe({
@@ -86,5 +90,15 @@ export class Courses implements OnInit {
         ? String(valueA).localeCompare(String(valueB))
         : String(valueB).localeCompare(String(valueA));
     });
+  }
+
+  addToSchedule(course: Course): void {
+    const added = this.scheduleService.addCourse(course);
+
+    if (added) {
+      alert(`${course.courseCode} har lagts till i ramschemat.`);
+    } else {
+      alert(`${course.courseCode} finns redan i ramschemat.`);
+    }
   }
 }
