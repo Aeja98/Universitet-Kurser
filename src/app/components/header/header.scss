@@ -1,0 +1,70 @@
+.site-header {
+  min-height: 64px;
+  background-color: #cddafd;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  color: #000;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+}
+
+.main-nav {
+  display: flex;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  color: #000;
+  border-left: solid 0.1rem #000;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.schedule-link {
+  background-color: #dbfdce;
+}
+
+.courses-link {
+  background-color: #fffacc;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  filter: brightness(0.96);
+}
+
+@media (max-width: 600px) {
+  .site-header {
+    flex-direction: column;
+  }
+
+  .logo {
+    padding: 1rem;
+    border-bottom: 2px solid #000;
+  }
+
+  .main-nav {
+    width: 100%;
+  }
+
+  .nav-link {
+    flex: 1;
+    justify-content: center;
+    min-height: 56px;
+  }
+
+  .nav-link:first-child {
+    border-left: none;
+  }
+}

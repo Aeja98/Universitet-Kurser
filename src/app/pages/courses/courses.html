@@ -1,0 +1,61 @@
+<section class="courses-page">
+  <h1>Kurser</h1>
+
+  <div class="filter-bar">
+  <label for="search">Sök kurs</label>
+  <input
+    id="search"
+    type="text"
+    placeholder="Sök på kurskod eller kursnamn"
+    [(ngModel)]="searchTerm"
+    (input)="filterCourses()"
+  >
+
+  <label for="subject">Välj ämne</label>
+  <select
+    id="subject"
+    [(ngModel)]="selectedSubject"
+    (change)="filterCourses()"
+  >
+    <option value="">Alla ämnen</option>
+
+    @for (subject of subjects; track subject) {
+      <option [value]="subject">{{ subject }}</option>
+    }
+  </select>
+</div>
+
+<p>Antal kurser i aktuell sökning: {{ filteredCourses.length }}</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Kurskod</th>
+        <th>Kursnamn</th>
+        <th>Poäng</th>
+        <th>Ämne</th>
+        <th>Kursplan</th>
+        <th>Ramschema</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (course of filteredCourses; track course.courseCode) {
+        <tr>
+          <td>{{ course.courseCode }}</td>
+          <td>{{ course.courseName }}</td>
+          <td>{{ course.points }}</td>
+          <td>{{ course.subjects }}</td>
+          <td>
+            <a [href]="course.syllabus" target="_blank" rel="noopener noreferrer">
+              Visa kursplan
+            </a>
+          </td>
+          <td>
+            <button type="button">Lägg till</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>
