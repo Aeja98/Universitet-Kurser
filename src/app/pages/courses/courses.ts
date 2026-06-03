@@ -9,13 +9,14 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './courses.html',
   styleUrl: './courses.scss'
 })
-
 export class Courses implements OnInit {
   courses: Course[] = [];
   filteredCourses: Course[] = [];
   subjects: string[] = [];
   searchTerm: string = '';
   selectedSubject: string = '';
+  sortColumn: keyof Course | '' = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
 
   constructor(private courseService: CourseService) {}
 
@@ -26,8 +27,8 @@ export class Courses implements OnInit {
 
         this.courses = data;
         this.filteredCourses = data;
-        this.subjects = [...new Set(data.map(course => course.subjects))]
-        .sort((a, b) => a.localeCompare(b));
+        this.subjects = [...new Set(data.map(course => course.subject))]
+          .sort((a, b) => a.localeCompare(b));
 
         console.log('Courses array after assignment:', this.courses);
       },
@@ -47,9 +48,43 @@ export class Courses implements OnInit {
 
       const matchesSubject =
         this.selectedSubject === '' ||
-        course.subjects === this.selectedSubject;
+        course.subject === this.selectedSubject;
 
       return matchesSearch && matchesSubject;
+    });
+
+    this.applySorting();
+  }
+
+  sortCourses(column: keyof Course): void {
+    if (this.sortColumn === column) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+
+    this.applySorting();
+  }
+
+  applySorting(): void {
+    if (!this.sortColumn) {
+      return;
+    }
+
+    this.filteredCourses = [...this.filteredCourses].sort((a, b) => {
+      const valueA = a[this.sortColumn as keyof Course];
+      const valueB = b[this.sortColumn as keyof Course];
+
+      if (typeof valueA === 'number' && typeof valueB === 'number') {
+        return this.sortDirection === 'asc'
+          ? valueA - valueB
+          : valueB - valueA;
+      }
+
+      return this.sortDirection === 'asc'
+        ? String(valueA).localeCompare(String(valueB))
+        : String(valueB).localeCompare(String(valueA));
     });
   }
 }

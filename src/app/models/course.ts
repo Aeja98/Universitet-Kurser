@@ -6,6 +6,6 @@ export interface Course {
   courseName: string;
   points: number;
   institutionCode: string;
-  subjects: string;
+  subject: string;
   syllabus: string;
 }

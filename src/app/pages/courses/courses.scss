@@ -27,10 +27,15 @@
   }
 }
 
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 2px solid #000;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
-  border: 2px solid #000;
   background-color: #fff;
 }
 
@@ -45,8 +50,12 @@ th {
   background-color: #cddafd;
 }
 
+td {
+  word-break: break-word;
+}
+
 button {
-  border: 2px solid #000;
+  border: 1px solid #000;
   background-color: #cddafd;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
@@ -57,7 +66,36 @@ button:hover {
   background-color: #b8c7f5;
 }
 
+.sort-button {
+  width: 100%;
+  border: none;
+  text-decoration: underline;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sort-button:hover {
+  text-decoration: underline;
+  background: none;
+  color: #2f4b99;
+}
+
 a {
   color: #000;
   font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  th, td {
+    padding: 0.4rem;
+  }
+
+  .table-wrapper {
+    font-size: 0.7rem;
+  }
+
+  button {
+    padding: 0.5rem;
+  }
 }
