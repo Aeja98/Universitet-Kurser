@@ -23,14 +23,15 @@ export class Courses implements OnInit {
     private courseService: CourseService,
     private scheduleService: ScheduleService
   ) {}
-
+  //load course data from json
   ngOnInit(): void {
     this.courseService.getCourses().subscribe({
       next: (data) => {
         console.log('Data from JSON:', data);
-
         this.courses = data;
         this.filteredCourses = data;
+
+        //create list of subjects for dropdown
         this.subjects = [...new Set(data.map(course => course.subject))]
           .sort((a, b) => a.localeCompare(b));
 
@@ -42,6 +43,7 @@ export class Courses implements OnInit {
     });
   }
 
+  //filter courses based on search
   filterCourses(): void {
     const search = this.searchTerm.toLowerCase().trim();
 
@@ -60,6 +62,7 @@ export class Courses implements OnInit {
     this.applySorting();
   }
 
+  //change sort if clicked again
   sortCourses(column: keyof Course): void {
     if (this.sortColumn === column) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
@@ -71,6 +74,7 @@ export class Courses implements OnInit {
     this.applySorting();
   }
 
+  //sort filtered list
   applySorting(): void {
     if (!this.sortColumn) {
       return;
@@ -92,6 +96,7 @@ export class Courses implements OnInit {
     });
   }
 
+  //add course to schedule
   addToSchedule(course: Course): void {
     const added = this.scheduleService.addCourse(course);
 

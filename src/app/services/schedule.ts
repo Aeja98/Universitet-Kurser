@@ -15,10 +15,12 @@ export class ScheduleService {
     this.loadFromLocalStorage();
   }
 
+  //returns selected courses
   getCourses(): Course[] {
     return this.selectedCourses;
   }
 
+  ///add course if it doesnt already exist
   addCourse(course: Course): boolean {
     const courseExists = this.selectedCourses.some(
       selectedCourse => selectedCourse.courseCode === course.courseCode
@@ -33,6 +35,7 @@ export class ScheduleService {
     return true;
   }
 
+  //remove course from schedule
   removeCourse(courseCode: string): void {
     this.selectedCourses = this.selectedCourses.filter(
       course => course.courseCode !== courseCode
@@ -41,6 +44,7 @@ export class ScheduleService {
     this.saveToLocalStorage();
   }
 
+  //calculate total crredits
   getTotalPoints(): number {
     return this.selectedCourses.reduce(
       (sum, course) => sum + course.points,
@@ -48,6 +52,7 @@ export class ScheduleService {
     );
   }
 
+  //load schedule from storage
   private saveToLocalStorage(): void {
     if (!this.isBrowser) {
       return;
