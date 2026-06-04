@@ -4,8 +4,10 @@
   @if (selectedCourses.length === 0) {
     <p>Du har inte lagt till några kurser i ditt ramschema än.</p>
   } @else {
-    <p>Antal valda kurser: {{ selectedCourses.length }}</p>
-    <p>Totalt antal högskolepoäng: {{ getTotalPoints() }} hp</p>
+    <div class="schedule-summary">
+      <p>Antal valda kurser: {{ selectedCourses.length }}</p>
+      <p>Totalt antal högskolepoäng: {{ getTotalPoints() }} hp</p>
+    </div>
 
     <div class="table-wrapper">
       <table>

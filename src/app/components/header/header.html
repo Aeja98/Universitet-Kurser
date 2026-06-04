@@ -2,11 +2,22 @@
   <a class="logo" routerLink="/">Universitetet</a>
 
   <nav class="main-nav" aria-label="Huvudmeny">
-    <a routerLink="/schedule" routerLinkActive="active" class="nav-link schedule-link">
+    <a
+      routerLink="/schedule"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      class="nav-link schedule-link"
+    >
       Ramschema
     </a>
 
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link courses-link">
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      ariaCurrentWhenActive="page"
+      class="nav-link courses-link"
+    >
       Kurser
     </a>
   </nav>

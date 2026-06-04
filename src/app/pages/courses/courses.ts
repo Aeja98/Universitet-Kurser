@@ -27,15 +27,12 @@ export class Courses implements OnInit {
   ngOnInit(): void {
     this.courseService.getCourses().subscribe({
       next: (data) => {
-        console.log('Data from JSON:', data);
         this.courses = data;
         this.filteredCourses = data;
 
         //create list of subjects for dropdown
         this.subjects = [...new Set(data.map(course => course.subject))]
           .sort((a, b) => a.localeCompare(b));
-
-        console.log('Courses array after assignment:', this.courses);
       },
       error: (error) => {
         console.error('Kunde inte läsa in kurser:', error);
@@ -62,7 +59,7 @@ export class Courses implements OnInit {
     this.applySorting();
   }
 
-  //change sort if clicked again
+  //change sort direction on click
   sortCourses(column: keyof Course): void {
     if (this.sortColumn === column) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';

@@ -20,7 +20,7 @@ export class ScheduleService {
     return this.selectedCourses;
   }
 
-  ///add course if it doesnt already exist
+  //add course if it doesnt already exist
   addCourse(course: Course): boolean {
     const courseExists = this.selectedCourses.some(
       selectedCourse => selectedCourse.courseCode === course.courseCode
@@ -52,7 +52,7 @@ export class ScheduleService {
     );
   }
 
-  //load schedule from storage
+  //save schedule to storage
   private saveToLocalStorage(): void {
     if (!this.isBrowser) {
       return;
@@ -61,6 +61,7 @@ export class ScheduleService {
     localStorage.setItem(this.storageKey, JSON.stringify(this.selectedCourses));
   }
 
+  //load schedule from storage
   private loadFromLocalStorage(): void {
     if (!this.isBrowser) {
       return;

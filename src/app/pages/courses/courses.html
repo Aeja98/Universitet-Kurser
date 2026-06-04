@@ -2,28 +2,28 @@
   <h1>Kurser</h1>
 
   <div class="filter-bar">
-  <label for="search">Sök kurs</label>
-  <input
-    id="search"
-    type="text"
-    placeholder="Sök på kurskod eller kursnamn"
-    [(ngModel)]="searchTerm"
-    (input)="filterCourses()"
-  >
+    <label for="search">Sök kurs</label>
+    <input
+      id="search"
+      type="text"
+      placeholder="Sök på kurskod eller kursnamn"
+      [(ngModel)]="searchTerm"
+      (input)="filterCourses()"
+    >
 
-  <label for="subject">Välj ämne</label>
-  <select
-    id="subject"
-    [(ngModel)]="selectedSubject"
-    (change)="filterCourses()"
-  >
-    <option value="">Alla ämnen</option>
+    <label for="subject">Välj ämne</label>
+    <select
+      id="subject"
+      [(ngModel)]="selectedSubject"
+      (change)="filterCourses()"
+    >
+      <option value="">Alla ämnen</option>
 
-    @for (subject of subjects; track subject) {
-      <option [value]="subject">{{ subject }}</option>
-    }
-  </select>
-</div>
+      @for (subject of subjects; track subject) {
+        <option [value]="subject">{{ subject }}</option>
+      }
+    </select>
+  </div>
 
 <p>Antal kurser i aktuell sökning: {{ filteredCourses.length }}</p>
 
@@ -71,6 +71,7 @@
               <a [href]="course.syllabus" target="_blank" rel="noopener noreferrer">
                 Visa kursplan
               </a>
+            </td>
             <td>
               <button type="button" (click)="addToSchedule(course)">
                 Lägg till
