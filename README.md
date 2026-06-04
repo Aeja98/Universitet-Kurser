@@ -2,8 +2,8 @@
 
 En webbplats skapad med Angular där användaren kan söka bland kurser och skapa ett eget ramschema.
 
-Länk till publicerad webbplats:
-
+Webbplats:
+https://universitet-kurser.onrender.com
 
 ## Funktioner
 
